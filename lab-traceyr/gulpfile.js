@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const eslint = require('gulp-eslint');
+const mocha = require('gulp-mocha');
 
 var testFiles = ['test/**/*.js'];
 var appFiles = ['lib/**/*.js'];
@@ -68,4 +69,9 @@ gulp.task('lint:test', () => {
   .pipe(eslint.format());
 });
 
-gulp.task('default', ['lint:app', 'lint:test']);
+gulp.task('mocha:test', () => {
+  gulp.src(testFiles)
+  .pipe(mocha());
+});
+
+gulp.task('default', ['lint:app', 'lint:test', 'mocha:test']);
