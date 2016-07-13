@@ -107,4 +107,10 @@ gulp.task('mocha:test', () => {
   .pipe(mocha());
 });
 
-gulp.task('default', ['lint:app', 'lint:test', 'lint:gulp', 'mocha:test']);
+gulp.task('watch:files', () => {
+  gulp.watch(testFiles,['mocha:test', 'lint:test'] );
+  gulp.watch(appFiles, ['lint:app']);
+  gulp.watch(gulpFiles, ['lint:gulp']);
+});
+
+gulp.task('default', ['lint:app', 'lint:test', 'lint:gulp', 'mocha:test', 'watch:files']);
